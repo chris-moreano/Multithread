@@ -1,0 +1,48 @@
+In this part, you will write a multithread program (C/C++) using POSIX Pthreads and
+synchronization mechanisms. Here is the description.
+You are setting up a new company (and create a name for your new company) that
+provides a platform to connect people (referred to as “Riders”) who want to have a ride
+to those (referred to as “Drivers”) who can offer to provide the ride. Your task is to
+design and implement the core of this platform with multithread programming (for
+system efficiency).
+More specifically, you can assume that there are up to N Riders and M Drivers. Each Rider
+(Driver) is a separate thread. Riders/Drivers arrive in random order and you may simulate
+their arrival times by having them sleep for a random amount of time. Assuming that all N
+Riders and M Drivers arrive within a time window of T minutes.
+Each Rider is identified by an ID (from 1 to N). The ID is created when the thread is
+created and passed to the Rider thread. Similarly, each Driver is identified by an ID (from
+N+1 to N+M). The ID is created when the thread is created and passed to the Driver
+thread.
+When a Rider arrives, he or she is registered with the system and is put into a shared
+waiting queue (WaitQueue[L]) if it is not full, which can hold up to L elements (i.e., L
+Riders). Otherwise the Rider has to wait. We assume L is less than N, i.e., the maximum
+number of Riders N is more than the capacity of the WaitQueue L. The Rider then waits
+for a Driver to respond and give him or she the ride. After the ride is completed (simulate
+by sleeping for a random amount of time), the Rider repeats the procedure, i.e., the Rider
+arrives.
+When a Driver arrives, he or she checks to see if there is any Rider waiting in the
+WaitQueue. If so, the Driver will pick up the Rider and remove the Rider from the
+WaitQueue. After the ride is completed (simulate this by sleeping for a random amount of
+time), the Driver will repeat the above procedure to check whether there is any Rider in the
+WaitQueue, etc. If the WaitQueue is empty when a Driver arrives, he or she has to wait
+until some Riders arrive and move to the WaitQueue.
+Your program should be free of race condition and no deadlock may happen, independent
+of the sequence of Driver and Rider threads. In addition, a Rider should be served as long
+as there is a Driver available and multiple Drivers may be providing riding service at the
+same time.
+The main program will sleep for time T and then terminates.Outputs
+• Each time a Rider arrives, print “Rider ID: arrived” and the length of
+WaitQueue
+• Each time a Driver arrives, print “Driver ID: arrived” and the length of
+WaitQueue
+• Each time a Driver picks a Rider, prints “Driver ID: riding” and the length of
+WaitQueue
+• Each time a Rider exists, print “Rider ID: completed riding” and the length of
+WaitQueue
+Run your program for at least 5 sets of different values of N, M, and T. For example,
+(1) N = 100, M = 10, T = 60 (minutes, but the program can simulate it as 60
+seconds)
+(2) N = 200, M = 5, T = 120
+(3) N = 50, M =2, T = 100
+(4) N = 10, M = 20, T = 60
+(5) N = 5, M =1, T = 40
